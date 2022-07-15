@@ -1,0 +1,2 @@
+heroku: https://thob-store.herokuapp.com/
+heroku git: https://git.heroku.com/thob-store.git 
