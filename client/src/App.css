@@ -1,0 +1,22 @@
+.root {
+  width: 80%;
+  margin: auto;
+}
+.info {
+  padding: 2rem;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  justify-items: center;
+}
+.container {
+  text-align: center;
+  display: inline-grid;
+  margin: 1.7rem;
+}
+img {
+  border: 3px solid #fff;
+  width: 95%;
+  margin: auto;
+  height: 200px;
+}
