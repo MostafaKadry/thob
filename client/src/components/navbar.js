@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <>
       <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
+        <>
           <form className="d-flex col-md-3" role="search">
             <input
               className="form-control me-2"
@@ -45,9 +45,24 @@ const Navbar = () => {
               <span className="badge bg-info">ثوب للملابس </span>
             </h2>
           </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon">
+              <hr style={{ margin: "0.5rem 0" }}></hr>
+              <hr style={{ margin: "0.5rem 0" }}></hr>
+              <hr style={{ margin: "0.5rem 0" }}></hr>
+            </span>
+          </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item mx-1">
+              <li className="nav-item m-1">
                 <img
                   src="./images/shoppingcart.png"
                   alt="shoping-cart"
@@ -55,18 +70,18 @@ const Navbar = () => {
                   onClick={handleCart}
                 />
               </li>
-              <li className="nav-item mx-1">
+              <li className="nav-item m-1">
                 <button onClick={handleshowmyproducts} className="border-0 p-0">
                   <span className="badge bg-primary p-2">منتجاتك</span>
                 </button>
               </li>
-              <li className="nav-item mx-1">
+              <li className="nav-item m-1">
                 <button onClick={handleAddProduct} className="border-0 p-0">
                   <span className="badge bg-primary p-2">بيع بضاعتك هنا</span>
                 </button>
               </li>
               {user ? (
-                <li className="nav-item">
+                <li className="nav-item m-1">
                   <button onClick={handleLogout} className="border-0 p-0">
                     <span className="badge bg-danger p-2">Logout</span>
                   </button>
@@ -87,7 +102,7 @@ const Navbar = () => {
               )}
             </ul>
           </div>
-        </div>
+        </>
       </nav>
     </>
   );

@@ -3,16 +3,24 @@ import Navbar from "./navbar";
 import axios from "axios";
 import Footer from "./footer";
 import Product from "./product";
+import { toast } from "react-toastify";
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const token = localStorage.getItem("token");
   useEffect(() => {
-    (async () => {
-      const data = await axios.get(`/api/shop`);
-      setLoading(false);
-      setProducts(data.data.allproducts);
-    })();
-  }, [products]);
+    axios
+      .get(`/api/shop`)
+      .then((data) => {
+        setProducts(data.data.allproducts);
+        setLoading(false);
+      })
+      .catch((err) => {
+        toast.error(
+          err.response.data.text ? err.response.data.text : "حدث خطأ"
+        );
+      });
+  }, [token]);
 
   return (
     <div className="container-fluid">
