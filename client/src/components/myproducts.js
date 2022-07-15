@@ -5,21 +5,25 @@ import { toast } from "react-toastify";
 import Navbar from "./navbar";
 import Footer from "./footer";
 const MyProducts = () => {
-  const apiUrl = "http://localhost:8000";
   const [myproducts, setMyproducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const token = localStorage.getItem("token");
   const isMine = true;
   useEffect(() => {
     axios
-      .get(`${apiUrl}/api/myproducts`, { params: { token } })
+      .get(`/api/myproducts`, { params: { token } })
       .then((res) => {
         console.log(res);
         setMyproducts(res.data);
         setLoading(false);
       })
       .catch((err) => {
-        if (err.response) return toast.error(err.response.data.text);
+        if (err.response)
+          return toast.error(
+            err.response.data.text
+              ? err.response.data.text
+              : "حدث خطأ برجاء المحاولة مرة اخرى"
+          );
         toast.error(" خطأ برجاء المحاولة في وقت لاحق");
       });
   }, [token]);

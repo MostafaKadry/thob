@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import Navbar from "./navbar";
 import Footer from "./footer";
 const Addproduct = () => {
-  const apiURL = `http://localhost:8000`;
   const [product, setProduct] = useState({
     name: "",
     price: 0,
@@ -32,7 +31,7 @@ const Addproduct = () => {
     )
       return toast.error("برجاء ادخال جميع البيانات بشكل صحيح");
     axios
-      .post(`${apiURL}/api/addproduct`, { product, token })
+      .post(`/api/addproduct`, { product, token })
       .then(() => toast.success(`تم اضافه المنتج بنجاح`))
       .catch((err) => {
         toast.error(
@@ -49,7 +48,7 @@ const Addproduct = () => {
         onSubmit={handleSubmit}
         method="POST"
         encType="multipart/form-data"
-        action={`${apiURL}/api/addproduct`}
+        action={`/api/addproduct`}
       >
         <div className="mb-3 col-md-3">
           <label className="form-label">اسم المنتج</label>

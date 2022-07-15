@@ -5,25 +5,25 @@ import { toast } from "react-toastify";
 import Navbar from "./navbar";
 import Footer from "./footer";
 const Singleproduct = () => {
-  const URL = `http://localhost:8000`;
   const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
-
   useEffect(() => {
     (async () => {
-      const { data } = await axios.get(`${URL}/api/singleproduct/${id}`);
+      const { data } = await axios.get(`/api/singleproduct/${id}`);
       setProduct(data);
       setLoading(false);
     })();
-  }, [id, URL]);
+  }, [id]);
 
   const handleAddCart = async () => {
     const tokenAndId = { id, token: localStorage.getItem("token") || null };
     await axios
-      .put(`${URL}/api/addtocart`, tokenAndId)
+      .put(`/api/addtocart`, tokenAndId)
       .then((response) => toast.success(response.data))
-      .catch((err) => toast.error(err.response.data.text || "حدث خطأ"));
+      .catch((err) =>
+        toast.error(err.response.data.text ? err.response.data.text : "حدث خطأ")
+      );
   };
   return (
     <div className="container-fluid">

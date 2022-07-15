@@ -28,13 +28,12 @@ const Registration = () => {
     cart: [],
   });
 
-  const apiUrl = `http://localhost:8000`;
   const key = `token`;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post(`${apiUrl}/register`, data)
+      .post(`/register`, data)
       .then((response) => {
         localStorage.setItem(key, response.data.token);
         console.log(jwtDecode(response.data.token));
@@ -44,7 +43,9 @@ const Registration = () => {
         }, 5000);
       })
       .catch((err) => {
-        toast.error(err.response.data.text || "خطأ فى البيانات");
+        toast.error(
+          err.response.data.text ? err.response.data.text : "خطأ فى البيانات"
+        );
       });
   };
   const handleChange = ({ target }) => {

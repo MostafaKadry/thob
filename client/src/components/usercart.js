@@ -4,7 +4,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import Footer from "./footer";
 const Usercart = () => {
-  const apiUrl = "http://localhost:8000";
   const token = localStorage.getItem("token");
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({});
@@ -21,7 +20,7 @@ const Usercart = () => {
   };
   const handleRemove = (id) => {
     axios
-      .delete(`${apiUrl}/api/mycart/${id}`, { params: { token } })
+      .delete(`/api/mycart/${id}`, { params: { token } })
       .then((res) => {
         toast.warning(res.data);
         setUser({
@@ -30,7 +29,9 @@ const Usercart = () => {
         });
       })
 
-      .catch((err) => toast.error(err.response.data.text));
+      .catch((err) =>
+        toast.error(err.response.data.text ? err.response.data.text : "حدث خطأ")
+      );
   };
   const getTotal = () => {
     let total = 0;
@@ -41,7 +42,7 @@ const Usercart = () => {
   };
   const emptyingCartFronDB = () => {
     axios
-      .delete(`${apiUrl}/api/delete-mycart`, { params: { token } })
+      .delete(`/api/delete-mycart`, { params: { token } })
       .then((res) => {
         setLoading(false);
         toast.warning(res.data);
@@ -50,7 +51,9 @@ const Usercart = () => {
           mycart: [],
         });
       })
-      .catch((err) => toast.error(err.response.data.text || "حدث خطأ"));
+      .catch((err) =>
+        toast.error(err.response.data.text ? err.response.data.text : "حدث خطأ")
+      );
   };
   const getPayPal = () => {
     if (!showPay) {
@@ -90,7 +93,7 @@ const Usercart = () => {
   };
   useEffect(() => {
     axios
-      .get(`${apiUrl}/api/mycart`, { params: { token } })
+      .get(`/api/mycart`, { params: { token } })
       .then((res) => {
         setUser(res.data);
         setLoading(false);
@@ -103,7 +106,7 @@ const Usercart = () => {
           err.response.data.text ? err.response.data.text : "حدث خطأ"
         );
       });
-  }, [apiUrl, token]);
+  }, [token]);
   return (
     <div className="container-fluid">
       <Navbar />

@@ -9,12 +9,12 @@ const Login = () => {
     password: "",
     email: "",
   });
-  const apiUrl = `http://localhost:8000`;
+
   const key = `token`;
   const handleSubmit = async (e) => {
     e.preventDefault();
     await axios
-      .post(`${apiUrl}/auth`, data)
+      .post(`/auth`, data)
       .then((response) => {
         localStorage.setItem(key, response.data.token);
         toast.success(`تم تسجيل الدخول بنجاح وجارى الانتقال للمتجر`);
@@ -24,7 +24,9 @@ const Login = () => {
       })
 
       .catch((err) => {
-        toast.error(err.response.data.text || "خطأ فى البيانات");
+        toast.error(
+          err.response.data.text ? err.response.data.text : "خطأ فى البيانات"
+        );
       });
   };
   const handleChange = ({ target }) => {

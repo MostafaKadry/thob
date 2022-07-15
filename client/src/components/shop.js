@@ -4,16 +4,15 @@ import axios from "axios";
 import Footer from "./footer";
 import Product from "./product";
 const Shop = () => {
-  const URL = `http://localhost:8000`;
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {
-      const data = await axios.get(`${URL}/api/shop`);
+      const data = await axios.get(`/api/shop`);
       setLoading(false);
       setProducts(data.data.allproducts);
     })();
-  }, [products, URL]);
+  }, [products]);
 
   return (
     <div className="container-fluid">
