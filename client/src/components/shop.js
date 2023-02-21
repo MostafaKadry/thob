@@ -4,27 +4,27 @@ import axios from "axios";
 import Footer from "./footer";
 import Product from "./product";
 import { toast } from "react-toastify";
+
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token") || null;
   useEffect(() => {
     axios
-      .get(`/api/shop`)
+      .get(`/api/shop/`)
       .then((data) => {
         setProducts(data.data.allproducts);
         setLoading(false);
       })
       .catch((err) => {
-        toast.error(
-          err.response.data.text ? err.response.data.text : "حدث خطأ"
-        );
+        toast.error(err.response.data ? err.response.data.text : "حدث خطأ");
       });
   }, [token]);
 
   return (
     <div className="container-fluid">
       <Navbar />
+
       <div className="loader m-2">
         {loading ? (
           <div className="">

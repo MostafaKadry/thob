@@ -22,7 +22,7 @@ const Singleproduct = () => {
       .put(`/api/addtocart`, tokenAndId)
       .then((response) => toast.success(response.data))
       .catch((err) =>
-        toast.error(err.response.data.text ? err.response.data.text : "حدث خطأ")
+        toast.error(err.response.data ? err.response.data.text : "حدث خطأ")
       );
   };
   return (

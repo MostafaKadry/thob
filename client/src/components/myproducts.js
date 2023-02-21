@@ -20,7 +20,7 @@ const MyProducts = () => {
       .catch((err) => {
         if (err.response)
           return toast.error(
-            err.response.data.text
+            err.response.data
               ? err.response.data.text
               : "حدث خطأ برجاء المحاولة مرة اخرى"
           );

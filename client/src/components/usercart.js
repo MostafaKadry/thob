@@ -30,7 +30,7 @@ const Usercart = () => {
       })
 
       .catch((err) =>
-        toast.error(err.response.data.text ? err.response.data.text : "حدث خطأ")
+        toast.error(err.response.data ? err.response.data.text : "حدث خطأ")
       );
   };
   const getTotal = () => {
@@ -52,7 +52,7 @@ const Usercart = () => {
         });
       })
       .catch((err) =>
-        toast.error(err.response.data.text ? err.response.data.text : "حدث خطأ")
+        toast.error(err.response.data ? err.response.data.text : "حدث خطأ")
       );
   };
   const getPayPal = () => {
@@ -102,9 +102,7 @@ const Usercart = () => {
         setLoading(false);
         if (err.code === "ERR_BAD_RESPONSE")
           return toast.error("لا يتوفر اتصال بالانترنت");
-        toast.warning(
-          err.response.data.text ? err.response.data.text : "حدث خطأ"
-        );
+        toast.warning(err.response.data ? err.response.data.text : "حدث خطأ");
       });
   }, [token]);
   return (

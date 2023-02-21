@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import { useAuth } from "./auth";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
-  let [user, setUser] = useState(localStorage.getItem("token"));
+  const auth = useAuth();
+  let [user, setUser] = useState(auth.user);
   const handleLogout = () => {
     toast.success("تم تسجيل الخروج بنجاح");
     localStorage.removeItem("token");
+    auth.logout();
     setUser(null);
     return;
   };

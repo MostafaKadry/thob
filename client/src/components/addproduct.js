@@ -35,7 +35,7 @@ const Addproduct = () => {
       .then(() => toast.success(`تم اضافه المنتج بنجاح`))
       .catch((err) => {
         toast.error(
-          err.response.data.text
+          err.response.data
             ? err.response.data.text
             : "حدث خطأ برجاء المحاولة مرة اخرى"
         );

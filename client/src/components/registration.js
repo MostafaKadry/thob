@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Outlet, Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import jwtDecode from "jwt-decode";
 import Navbar from "./navbar";
 import Footer from "./footer";
 const Registration = () => {
@@ -36,7 +35,6 @@ const Registration = () => {
       .post(`/register`, data)
       .then((response) => {
         localStorage.setItem(key, response.data.token);
-        console.log(jwtDecode(response.data.token));
         toast.success(`تم تسجيل حساب جديد بنجاح جارى الانتقال للمتجر`);
         setTimeout(() => {
           window.location = "/";
@@ -44,7 +42,7 @@ const Registration = () => {
       })
       .catch((err) => {
         toast.error(
-          err.response.data.text ? err.response.data.text : "خطأ فى البيانات"
+          err.response.data ? err.response.data.text : "خطأ فى البيانات"
         );
       });
   };

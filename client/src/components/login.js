@@ -1,32 +1,35 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Navbar from "./navbar";
 import Footer from "./footer";
+import { useAuth } from "./auth";
 const Login = () => {
   const [data, setData] = useState({
     password: "",
     email: "",
   });
-
+  const navigate = useNavigate();
+  const auth = useAuth();
   const key = `token`;
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     await axios
-      .post(`/auth`, data)
+      .post(`/auth/`, data)
       .then((response) => {
         localStorage.setItem(key, response.data.token);
+        auth.login(response.data.token);
         toast.success(`تم تسجيل الدخول بنجاح وجارى الانتقال للمتجر`);
         setTimeout(() => {
-          window.location = "/";
-        }, 4000);
+          navigate("/");
+        }, 2000);
       })
 
       .catch((err) => {
-        toast.error(
-          err.response.data.text ? err.response.data.text : "خطأ فى البيانات"
-        );
+        console.log(err);
+        toast.error(err.response ? err.response.data : "خطأ فى البيانات");
       });
   };
   const handleChange = ({ target }) => {

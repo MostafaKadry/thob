@@ -1,11 +1,10 @@
 const express = require("express");
+const app = express();
+const { getDb, connectToDb } = require("./db.js");
 const { ObjectID } = require("mongodb");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { getDb, connectToDb } = require("./db.js");
-const app = express();
 const jwt_decode = require("jwt-decode");
-const { json } = require("express");
 
 app.use(express.json());
 app.use(require("cors")());
@@ -105,7 +104,7 @@ app.post("/api/addproduct", (req, res, next) => {
       .json({ text: "برجاء ادخال جميع البيانات بشكل صحيح" });
   const userData = jwt_decode(userToken);
   req.body.product.sellerData = userData;
-  console.log("adedd", req.body.product);
+
   db.collection("allproducts")
     .insertOne({ product: req.body.product })
     .then((results) => res.status(200).json({ results }))
