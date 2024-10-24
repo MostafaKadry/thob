@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const app = express();
 const { getDb, connectToDb } = require("./db.js");
@@ -11,7 +12,6 @@ app.use(require("cors")());
 PORT = process.env.PORT || 8000;
 
 let db;
-
 connectToDb((err) => {
   if (!err) {
     app.listen(PORT, () => console.log(`app is working on port ${PORT}`));
